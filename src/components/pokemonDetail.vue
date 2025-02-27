@@ -1,7 +1,7 @@
 <script setup>
 import { fetchAPI } from "@/utils";
 import { ref, onMounted } from "vue";
-import PokemonEvolutionChain from "./PokemonEvolutionChain.vue";
+import PokemonEvolutionChain from "@/PokemonEvolutionChain.vue";
 import { useRoute } from "vue-router";
 import BackHome from "./BackHome.vue";
 
@@ -99,18 +99,6 @@ function getStatSymbol(statName) {
   </div>
 </template>
 <style>
-.btn {
-  display: block;
-  position: fixed;
-  font-size: 14px;
-  top: 5%;
-  left: 5%;
-  border-radius: 30px;
-  padding: 5px 10px;
-  background-color: #fff;
-  box-shadow: #63636333 0 4px 8px;
-  border: none;
-}
 .pkm__detail {
   padding-top: 50px;
   margin-block: 50px;
