@@ -34,7 +34,6 @@ function getStatSymbol(statName) {
 <template>
   <BackHome />
   <div class="pkm__detail" v-if="pokemon.id">
-    <!-- <div class="item__id">#{{ pokemon.id }}</div> -->
     <div
       class="item__image--detail"
       :style="`background-image: url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png');`"
@@ -130,7 +129,6 @@ function getStatSymbol(statName) {
 .text {
   font-size: 18px;
   font-weight: 600;
-  /* margin-bottom: 5px; */
 }
 .info p,
 .ability {

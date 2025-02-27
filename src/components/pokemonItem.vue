@@ -65,7 +65,6 @@ onMounted(fetchPokemon);
 }
 .item__name {
   text-align: center;
-
   box-shadow: none;
   font-weight: 700;
   font-size: 17px;
@@ -81,7 +80,6 @@ onMounted(fetchPokemon);
 }
 .type > * {
   text-transform: capitalize;
-  /* width: 100%; */
   margin-bottom: 5px;
   padding: 7px;
   border-radius: 7px;
@@ -89,107 +87,83 @@ onMounted(fetchPokemon);
   font-size: 12px;
   font-weight: bold;
 }
-
 @media only screen and (min-width: 10px) {
   .item {
     width: 40%;
   }
 }
-
 @media only screen and (min-width: 768px) {
   .item {
     width: 30%;
   }
 }
-
 @media only screen and (min-width: 960px) {
   .item {
     width: 20%;
   }
 }
-
 @media only screen and (min-width: 1200px) {
   .item {
     width: 15%;
   }
 }
-
 .normal {
   background-color: #a8a77a;
 }
-
 .fighting {
   background-color: #c22e28;
 }
-
 .flying {
   background-color: #a98ff3;
 }
-
 .poison {
   background-color: #a33ea1;
 }
-
 .ground {
   background-color: #e2bf65;
 }
-
 .rock {
   background-color: #b6a136;
 }
-
 .bug {
   background-color: #a6b91a;
 }
-
 .ghost {
   background-color: #735797;
 }
-
 .steel {
   background-color: #b7b7ce;
 }
-
 .fire {
   background-color: #ff421c;
 }
-
 .water {
   background-color: #6390f0;
 }
-
 .grass {
   background-color: #78cd54;
 }
-
 .electric {
   background-color: #f7d02c;
 }
-
 .psychic {
   background-color: #f95587;
 }
-
 .ice {
   background-color: #96d9d6;
 }
-
 .dragon {
   background-color: #6f35fc;
 }
-
 .dark {
   background-color: #705746;
 }
-
 .fairy {
   background-color: #d685ad;
 }
-
 .unknow {
   background-color: #68a090;
 }
-
 .shadow {
   background-color: #735797;
 }
