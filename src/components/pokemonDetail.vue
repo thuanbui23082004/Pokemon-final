@@ -1,9 +1,23 @@
 <script setup>
+import { fetchAPI } from "@/utils";
+import { ref, onMounted } from "vue";
 import PokemonEvolutionChain from "./PokemonEvolutionChain.vue";
+import { useRoute } from "vue-router";
+import BackHome from "./BackHome.vue";
 
-defineProps(["pokemon", "pokemon_desc"]);
-defineEmits(["back"]);
+const route = useRoute();
+const pokemon = ref({});
+const pokemonSpecies = ref({});
 
+onMounted(() => {
+  const name = route.params.name;
+  fetchAPI(`https://pokeapi.co/api/v2/pokemon/${name}`).then((data) => {
+    pokemon.value = data;
+  });
+  fetchAPI(`https://pokeapi.co/api/v2/pokemon-species/${name}`).then((data) => {
+    pokemonSpecies.value = data;
+  });
+});
 function getStatSymbol(statName) {
   const statSymbols = {
     hp: "HP",
@@ -18,8 +32,8 @@ function getStatSymbol(statName) {
 </script>
 
 <template>
-  <button @click="$emit('back')" class="btn">&larr; Back</button>
-  <div class="pkm__detail">
+  <BackHome />
+  <div class="pkm__detail" v-if="pokemon.id">
     <!-- <div class="item__id">#{{ pokemon.id }}</div> -->
     <div
       class="item__image--detail"
@@ -37,7 +51,13 @@ function getStatSymbol(statName) {
       </span>
     </div>
     <div class="item__name--detail item__name">{{ pokemon.name }}</div>
-    <p class="pokedex-entry">{{ pokemon_desc }}</p>
+    <p class="pokedex-entry">
+      {{
+        pokemonSpecies.flavor_text_entries
+          .find((entry) => entry.language.name === "en")
+          ?.flavor_text.replace(/[\n\f]/g, " ") || ""
+      }}
+    </p>
     <div class="info">
       <div class="height">
         <div class="text">Height</div>
@@ -73,6 +93,9 @@ function getStatSymbol(statName) {
     <PokemonEvolutionChain
       :speciesUrl="`https://pokeapi.co/api/v2/pokemon-species/${pokemon.id}/`"
     />
+  </div>
+  <div v-else>
+    <h1>Loading Pokemon Details.....</h1>
   </div>
 </template>
 <style>

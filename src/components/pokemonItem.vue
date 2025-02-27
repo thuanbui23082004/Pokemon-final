@@ -1,32 +1,27 @@
 <script setup>
 import { ref, onMounted } from "vue";
+import { useRouter } from "vue-router";
+import { fetchAPI } from "@/utils";
 
+const router = useRouter();
 const props = defineProps(["url"]);
-defineEmits(["select-pokemon"]);
-async function cFetch(URL) {
-  const response = await fetch(URL);
-  return await response.json();
-}
+
 const pokemon = ref({});
-const pokemon__desc = ref({});
-cFetch(props.url).then((data) => {
+
+fetchAPI(props.url).then((data) => {
   pokemon.value = data;
 });
 async function fetchPokemon() {
-  pokemon.value = await cFetch(props.url);
-
-  const speciesData = await cFetch(
-    `https://pokeapi.co/api/v2/pokemon-species/${pokemon.value.id}/`
-  );
-  pokemon__desc.value =
-    speciesData.flavor_text_entries
-      .find((entry) => entry.language.name === "en")
-      ?.flavor_text.replace(/[\n\f]/g, " ") || "";
+  pokemon.value = await fetchAPI(props.url);
+}
+function viewPokemonDetail() {
+  sessionStorage.setItem("selectdPokemon", JSON.stringify(pokemon.value.name));
+  router.push("/" + pokemon.value.name);
 }
 onMounted(fetchPokemon);
 </script>
 <template>
-  <div class="item" @click="$emit('select-pokemon', pokemon, pokemon__desc)">
+  <div class="item" @click="viewPokemonDetail">
     <div class="item__id">#{{ pokemon.id }}</div>
     <div
       class="item__image"
