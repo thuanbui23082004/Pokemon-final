@@ -2,8 +2,6 @@
 import { ref, computed } from "vue";
 import pokemon from "@/components/pokemonItem.vue";
 import pokemonDetail from "@/components/pokemonDetail.vue";
-import { fetchAPI } from "@/utils";
-
 let pokemons = [];
 const offset = ref(0);
 const number_of_render = 12;
@@ -11,8 +9,12 @@ const filteredPokemons = ref([]);
 const renderPokemons = computed(() =>
   filteredPokemons.value.slice(0, offset.value + number_of_render)
 );
+async function cFetch(URL) {
+  const response = await fetch(URL);
+  return await response.json();
+}
 async function fetchPokemons() {
-  const data = await fetchAPI("https://pokeapi.co/api/v2/pokemon/?offset=0&limit=898");
+  const data = await cFetch("https://pokeapi.co/api/v2/pokemon/?offset=0&limit=898");
   pokemons = data.results;
   filteredPokemons.value = pokemons;
 }
@@ -44,6 +46,8 @@ function handleSearch(event) {
       <div class="app">
         <pokemon v-for="pokemon in renderPokemons" :key="pokemon.name" :url="pokemon.url" />
       </div>
+      <!-- <div ref="app" class="app">LOADING DATA FROM POKEDEX</div> -->
+
       <button
         v-show="filteredPokemons.length > number_of_render"
         class="button"
@@ -54,6 +58,7 @@ function handleSearch(event) {
     </template>
   </div>
 </template>
+
 <style>
 body {
   background-color: #fff;
@@ -76,6 +81,7 @@ body {
   font-size: 37.5px;
   font-weight: 400;
 }
+
 .search {
   display: flex;
   justify-content: center;
@@ -90,12 +96,14 @@ body {
   border: none;
   transition: all 0.2s ease;
 }
+
 .app {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 10px;
 }
+
 .button {
   display: block;
   margin-inline: auto;
