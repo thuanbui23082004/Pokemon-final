@@ -12,6 +12,9 @@
 //   const parts = url.split("/");
 //   return parseInt(parts[parts.length - 2], 10);
 // }
+import axios from "axios";
+
+axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
 export function getIDPokemon(url) {
   const parts = url.split("/");
   return parseInt(parts[parts.length - 2], 10);
