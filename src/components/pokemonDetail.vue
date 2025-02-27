@@ -1,7 +1,7 @@
 <script setup>
 import { fetchAPI } from "@/utils";
 import { ref, onMounted } from "vue";
-import PokemonEvolutionChain from "@/PokemonEvolutionChain.vue";
+import PokemonEvolutionChain from "@/components/PokemonEvolutionChain.vue";
 import { useRoute } from "vue-router";
 import BackHome from "./BackHome.vue";
 
